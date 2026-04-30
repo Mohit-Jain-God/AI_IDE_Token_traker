@@ -1,0 +1,47 @@
+# ── Dependencies ──────────────────────────────────────
+node_modules/
+.pnp
+.pnp.js
+
+# ── Build outputs ─────────────────────────────────────
+dist/
+out/
+build/
+
+# ── Logs ──────────────────────────────────────────────
+*.log
+vite-dev.out.log
+vite-dev.err.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ── Local data / DB ───────────────────────────────────
+*.json.tmp
+.antigravity-quota-tracker.json
+
+# ── OS files ──────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Editor ────────────────────────────────────────────
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+*.suo
+*.user
+
+# ── VS Code / Antigravity Extension ───────────────────
+extension/node_modules/
+extension/out/
+extension/*.vsix
+
+# ── Environment ───────────────────────────────────────
+.env
+.env.local
+.env.*.local
+
+# ── TypeScript cache ──────────────────────────────────
+*.tsbuildinfo

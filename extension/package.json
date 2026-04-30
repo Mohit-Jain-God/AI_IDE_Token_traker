@@ -1,0 +1,104 @@
+{
+  "name": "antigravity-quota-tracker",
+  "displayName": "Antigravity Quota Tracker",
+  "description": "Tracks Google AI token quotas across 10 free-tier accounts and syncs with the local dashboard.",
+  "version": "1.2.5",
+  "publisher": "antigravity-dev",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/antigravity-quota-tracker"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": ["Other"],
+  "keywords": ["google", "gemini", "quota", "token", "ai", "antigravity"],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:antigravityQuota.refresh",
+    "onCommand:antigravityQuota.openDashboard",
+    "onCommand:antigravityQuota.setActiveAccount",
+    "onCommand:antigravityQuota.diagnose"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "antigravityQuota.refresh",
+        "title": "Antigravity: Force Quota Sync",
+        "icon": "$(sync)"
+      },
+      {
+        "command": "antigravityQuota.openDashboard",
+        "title": "Antigravity: Open Quota Dashboard"
+      },
+      {
+        "command": "antigravityQuota.setActiveAccount",
+        "title": "Antigravity: Set Active Google Account"
+      },
+      {
+        "command": "antigravityQuota.diagnose",
+        "title": "Antigravity: Diagnose Quota Tracking",
+        "icon": "$(debug-alt)"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Antigravity Quota Tracker",
+      "properties": {
+        "antigravityQuota.serverUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:9876",
+          "description": "URL of the local Antigravity Quota Tracker dashboard server."
+        },
+        "antigravityQuota.syncIntervalSeconds": {
+          "type": "number",
+          "default": 300,
+          "minimum": 30,
+          "description": "How often (in seconds) to automatically sync quota data."
+        },
+        "antigravityQuota.grpcPort": {
+          "type": "number",
+          "default": 7493,
+          "description": "Legacy fallback port for older gRPC-style Antigravity quota probes."
+        },
+        "antigravityQuota.accounts": {
+          "type": "array",
+          "default": [],
+          "description": "List of Google account emails to track.",
+          "items": { "type": "string" }
+        },
+        "antigravityQuota.enableLogWatcher": {
+          "type": "boolean",
+          "default": true,
+          "description": "Watch IDE log files for RESOURCE_EXHAUSTED events."
+        }
+      }
+    },
+    "menus": {
+      "editor/title": [
+        {
+          "command": "antigravityQuota.refresh",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package --no-dependencies",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "*",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^5.4.0",
+    "@vscode/vsce": "^2.26.0"
+  }
+}
